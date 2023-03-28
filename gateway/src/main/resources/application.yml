@@ -1,0 +1,42 @@
+server:
+  port: 8765
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: food
+          uri: lb://FOOD/
+          predicates:
+            - Path=/food/**
+        - id: storage
+          uri: lb://STORAGE/
+          predicates:
+            - Path=/storage/**
+        - id: manager_info
+          uri: lb://MANAGERINFO/
+          predicates:
+            - Path=/manager-info/**
+        - id: cart
+          uri: lb://CART/
+          predicates:
+            - Path=/cart/**
+        - id: user
+          uri: lb://USER/
+          predicates:
+            - Path=/user/**
+        - id: shipper
+          uri: lb://SHIPPER/
+          predicates:
+            - Path=/shipper/**
+        - id: virtual
+          uri: lb://VIRTUAL/
+          predicates:
+            - Path=/api/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
